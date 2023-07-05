@@ -3,27 +3,27 @@ const { model, Schema, Types } = require("mongoose");
 const dealershipSchema = new Schema({
 dealership_email: {
     type: String,
-    required: true,
+    // required: true,
   },
   dealership_id: {
     type: String,
-    required: true,
+    // required: true,
   },
   dealership_name: {
     type: String,
-    required: true,
+    // required: true,
   },
   dealership_location: {
     type: String,
-    required: true,
+    // required: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   dealership_info: {
     type: String,
-    required: true,
+    // required: true,
   },
   cars: {
     type: Types.ObjectId,

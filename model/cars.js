@@ -3,23 +3,23 @@ const { model, Schema, Types } = require("mongoose");
 const carSchema = new Schema({
     user_id: {
     type: String,
-    required: true,
+    // required: true,
   },
   type: {
     type: String,
-    required: true,
+    // required: true,
   },
   name: {
     type: String,
-    required: true,
+    // required: true,
   },
   model: {
     type: String,
-    required: true,
+    // required: true,
   },
   car_info: {
       type: String,
-      required : true
+    //   required : true
     },
     // car_id varchar [primary key, note: 'randomly generated']
     // type varchar

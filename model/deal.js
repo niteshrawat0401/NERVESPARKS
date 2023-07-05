@@ -3,15 +3,15 @@ const { model, Schemam, Types } = require("mongoose");
 const dealSchema = new Schema({
     deal_id: {
     type: String,
-    required: true,
+    // required: true,
   },
   car_id: {
-    type: String,
-    required: true,
-  },
-  deal_info: {
     type: Types.ObjectId,
     ref: "car",
+  },
+  deal_info: {
+    type: String,
+    // required: true,
   }
 //   deal_id varchar [primary key, note: 'randomly generated']
 //   car_id varchar 

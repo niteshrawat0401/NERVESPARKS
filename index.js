@@ -1,11 +1,18 @@
 const express = require('express')
 require("dotenv").config()
 const connection = require("./db/db")
+const userRouter = require('./routes/userRouter')
+const dealerRouter = require('./routes/dealershipRouter')
+const adminRouter = require('./routes/adminRouter')
 
 const app = express()
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+app.use('/auth', userRouter)
+app.use('/dealer', dealerRouter)
+app.use('/admin', adminRouter)
 app.get('/', (req,res) => res.send('hello'))
 
 const PORT = process.env.PORT || 8000;

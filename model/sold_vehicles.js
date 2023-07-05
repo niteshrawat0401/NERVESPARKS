@@ -3,7 +3,7 @@ const { model, Schema, Types } = require("mongoose");
 const soldVehiclesSchema = new Schema({
     vehicle_id: {
     type: String,
-    required: true,
+    // required: true,
   },
   car_id: {
     type: Types.ObjectId,
@@ -11,7 +11,7 @@ const soldVehiclesSchema = new Schema({
   },
   vehicle_info: {
     type: String,
-    required: true,
+    // required: true,
   },
 //   vehicle_id varchar [primary key, note: 'randomly generated']
 //   car_id varchar

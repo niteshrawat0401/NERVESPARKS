@@ -3,11 +3,15 @@ const { model, Schema } = require("mongoose");
 const adminSchema = new Schema({
   admin_name: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  admin_id: {
+    type: String,
+    // required: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 
