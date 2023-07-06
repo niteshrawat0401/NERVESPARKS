@@ -6,6 +6,7 @@ const dealerRouter = require('./routes/dealershipRouter')
 const adminRouter = require('./routes/adminRouter')
 const carsRouter = require('./routes/carsRouter')
 const soldVehicleRouter = require('./routes/soldVehiclesRouter')
+const dealRouter = require('./routes/dealRouter')
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use('/dealer', dealerRouter)
 app.use('/admin', adminRouter)
 app.use('/car', carsRouter)
 app.use('/sold', soldVehicleRouter)
+app.use('/deal', dealRouter)
 app.get('/', (req,res) => res.send('hello'))
 
 const PORT = process.env.PORT || 8000;

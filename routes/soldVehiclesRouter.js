@@ -20,4 +20,17 @@ soldVehicleRouter.post("/create", async(req, res)=>{
     }
   })
 
+
+soldVehicleRouter.get("/getAllSoldCar", async(req, res)=>{
+    let { vehicle_id, car_id, vehicle_info } = req.body;
+    let getSoldCars = await SoldVehicle.find({}).populate("car_id")
+    try {
+      if(getSoldCars){
+        return res.status(201).json({ msg: "getSoldCars succssfully", getSoldCars})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
   module.exports = soldVehicleRouter

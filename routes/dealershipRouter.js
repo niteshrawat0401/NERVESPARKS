@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const Dealership = require("../model/dealership");
+const Cars = require("../model/cars");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Token = require('../model/token')
+const Token = require('../model/token');
+const SoldVehicle = require("../model/sold_vehicles");
 require("dotenv").config();
 
 
@@ -68,5 +70,30 @@ dealerRouter.post("/signup", async (req, res) => {
       return res.status(500).json({msg: "Server error"})
     }
   });
+
+  dealerRouter.get("/get", async(req, res)=>{
+    let { user_id, type, name, model, car_info} = req.body;
+    let geteCars = await Cars.find({})
+    try {
+      if(geteCars){
+        return res.status(201).json({ msg: "Cars succssfully created", geteCars})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
+  dealerRouter.get("/getAllSoldCar", async(req, res)=>{
+    let { vehicle_id, car_id, vehicle_info } = req.body;
+    let getSoldCars = await SoldVehicle.find({}).populate("car_id")
+    try {
+      if(getSoldCars){
+        return res.status(201).json({ msg: "getSoldCars succssfully", getSoldCars})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
 
   module.exports = dealerRouter

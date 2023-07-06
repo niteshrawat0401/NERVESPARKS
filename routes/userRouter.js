@@ -3,7 +3,8 @@ const Users = require("../model/user");
 const Cars = require('../model/cars')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Token = require('../model/token')
+const Token = require('../model/token');
+const Dealership = require("../model/dealership");
 require("dotenv").config();
 
 const userRouter = Router();
@@ -70,6 +71,18 @@ userRouter.post("/signup", async (req, res) => {
 // Get all car
   userRouter.get("/get", async(req, res)=>{
     let geteCars = await Cars.find({})
+    try {
+      if(geteCars){
+        return res.status(201).json({ msg: "Cars succssfully created", geteCars})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
+  // Gell All dealership
+  userRouter.get("/getAlldealership", async(req, res)=>{
+    let geteCars = await Dealership.find({})
     try {
       if(geteCars){
         return res.status(201).json({ msg: "Cars succssfully created", geteCars})
