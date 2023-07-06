@@ -3,6 +3,7 @@ const { Router } = require("express");
 
 const dealRouter = Router();
 
+// To add deals to dealership
 dealRouter.post("/create", async(req, res)=>{
     let { deal_id, car_id, deal_info } = req.body;
     let dealCars = await Deal.create({

@@ -5,12 +5,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Token = require('../model/token');
 const SoldVehicle = require("../model/sold_vehicles");
+const Deal = require("../model/deal");
 require("dotenv").config();
 
 
 const dealerRouter = Router();
 
-dealerRouter.post("/signup", async (req, res) => {
+// To add cars to dealership
+dealerRouter.post("/create", async (req, res) => {
     const { dealership_email, dealership_id, dealership_name, dealership_location, password, dealership_info, cars, deals, sold_vehicles } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     const newuser = await new Dealership({
@@ -35,7 +37,7 @@ dealerRouter.post("/signup", async (req, res) => {
   });
 
 
-  dealerRouter.post("/login", async (req, res) => {
+  dealerRouter.post("/log", async (req, res) => {
     const { dealership_email } = req.body;
     const user = await Dealership.findOne({  dealership_email: dealership_email });
     if (!user) {
@@ -71,6 +73,7 @@ dealerRouter.post("/signup", async (req, res) => {
     }
   });
 
+  // To view all cars.
   dealerRouter.get("/get", async(req, res)=>{
     let { user_id, type, name, model, car_info} = req.body;
     let geteCars = await Cars.find({})
@@ -83,12 +86,26 @@ dealerRouter.post("/signup", async (req, res) => {
     }
   })
 
+
+  // To view all cars sold by dealership
   dealerRouter.get("/getAllSoldCar", async(req, res)=>{
     let { vehicle_id, car_id, vehicle_info } = req.body;
     let getSoldCars = await SoldVehicle.find({}).populate("car_id")
     try {
       if(getSoldCars){
         return res.status(201).json({ msg: "getSoldCars succssfully", getSoldCars})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
+
+  dealerRouter.get("/allDeals", async(req, res)=>{
+    let getAlldeals = await Deal.find({}).populate("car_id")
+    try {
+      if(getAlldeals){
+        return res.status(201).json({ msg: "getAlldeals succssfully", getAlldeals})
       }
     } catch (error) {
       return res.status(500).json({ msg: "Try again latter", error})

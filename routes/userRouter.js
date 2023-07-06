@@ -5,12 +5,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Token = require('../model/token');
 const Dealership = require("../model/dealership");
+const Deal = require("../model/deal");
 require("dotenv").config();
 
 const userRouter = Router();
 
 
-userRouter.post("/signup", async (req, res) => {
+userRouter.post("/create", async (req, res) => {
     const { user_email, user_id, user_location, user_info, password, vehicle_info } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     const newuser = await new Users({
@@ -32,7 +33,7 @@ userRouter.post("/signup", async (req, res) => {
   });
 
 
-  userRouter.post("/login", async (req, res) => {
+  userRouter.post("/log", async (req, res) => {
     const { user_email, user_id, user_location, user_info, password, vehicle_info } = req.body;
     const user = await Users.findOne({  user_email: user_email });
     if (!user) {
@@ -68,28 +69,65 @@ userRouter.post("/signup", async (req, res) => {
     }
   });
 
-// Get all car
+// To view all cars
   userRouter.get("/get", async(req, res)=>{
     let geteCars = await Cars.find({})
     try {
       if(geteCars){
-        return res.status(201).json({ msg: "Cars succssfully created", geteCars})
+        return res.status(201).json({ msg: "geteAllCars succssfully get", geteCars})
       }
     } catch (error) {
       return res.status(500).json({ msg: "Try again latter", error})
     }
   })
 
-  // Gell All dealership
+  // To view all cars in a dealership
   userRouter.get("/getAlldealership", async(req, res)=>{
-    let geteCars = await Dealership.find({})
+    let getdealership = await Dealership.find({}).populate({path: 'cars deals sold_vehicles'})
+    // .populate("cars")
     try {
-      if(geteCars){
-        return res.status(201).json({ msg: "Cars succssfully created", geteCars})
+      if(getdealership){
+        return res.status(201).json({ msg: "Alldealership succssfully get", getdealership})
       }
     } catch (error) {
       return res.status(500).json({ msg: "Try again latter", error})
     }
   })
 
+  // To view all vehicles owned by user
+  userRouter.get("/ownedVehicle", async(req, res)=>{
+    let ownedVehicle = await Users.find({}).populate("vehicle_info")
+    try {
+      if(ownedVehicle){
+        return res.status(201).json({ msg: "getAlldealership succssfully", ownedVehicle})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
+
+  // To view all deals on a certain car
+  userRouter.get("/allDeals", async(req, res)=>{
+    let getAlldeals = await Deal.find({}).populate("car_id")
+    try {
+      if(getAlldeals){
+        return res.status(201).json({ msg: "getAlldeals succssfully", getAlldeals})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
+
+  // To allow user to buy a car after a deal is made
+  userRouter.get("/buycar", async(req, res)=>{
+    let buyDeals = await Users.find({}).populate("vehicle_info")
+    try {
+      if(buyDeals){
+        return res.status(201).json({ msg: "buyDeals succssfully", buyDeals})
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: "Try again latter", error})
+    }
+  })
   module.exports = userRouter

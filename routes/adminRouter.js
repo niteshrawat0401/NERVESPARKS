@@ -8,7 +8,7 @@ require("dotenv").config();
 
 const adminRouter = Router();
 
-adminRouter.post("/signup", async (req, res) => {
+adminRouter.post("/create", async (req, res) => {
     const { admin_email, admin_id, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     const newuser = await new Admin({
@@ -27,7 +27,7 @@ adminRouter.post("/signup", async (req, res) => {
   });
 
 
-  adminRouter.post("/login", async (req, res) => {
+  adminRouter.post("/log", async (req, res) => {
     const { admin_email } = req.body;
     const user = await Admin.findOne({  admin_email: admin_email });
     if (!user) {

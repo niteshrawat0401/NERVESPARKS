@@ -3,6 +3,7 @@ const { Router } = require("express");
 
 const soldVehicleRouter = Router();
 
+// To add new vehicle to the list of sold vehicles after a deal is made
 soldVehicleRouter.post("/create", async(req, res)=>{
     let { vehicle_id, car_id, vehicle_info } = req.body;
     let soldCars = await SoldVehicle.create({
