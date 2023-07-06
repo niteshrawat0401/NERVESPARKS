@@ -68,6 +68,7 @@ Get: http://localhost:8080/user/buycar
 
 Dealership
 
+
 <h3>Step 10: To add cars to dealership</h3>
 
 ```Javascript
@@ -98,7 +99,9 @@ Get: http://localhost:8080/dealer/getAllSoldCar
 Get: http://localhost:8080/dealer/allDeals
 ```
 
+
 Cars
+
 
 <h3>Step 15: create cars</h3>
 
@@ -112,7 +115,9 @@ Get: http://localhost:8080/car/create
 Get: http://localhost:8080/car/get
 ```
 
+
 Deal
+
 
 <h3>Step 17: create deals</h3>
 
@@ -120,7 +125,9 @@ Deal
 Get: http://localhost:8080/deal/get
 ```
 
+
 Sold vehicle
+
 
 <h3>Step 18: create sold vehicle</h3>
 
