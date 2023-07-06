@@ -64,7 +64,7 @@ Get: http://localhost:8080/user/allDeals
 ```Javascript
 Get: http://localhost:8080/user/buycar
 ```
-
+<br/>
 
 Dealership
 
@@ -98,7 +98,7 @@ Get: http://localhost:8080/dealer/getAllSoldCar
 ```Javascript
 Get: http://localhost:8080/dealer/allDeals
 ```
-
+<br/>
 
 Cars
 
@@ -114,7 +114,7 @@ Get: http://localhost:8080/car/create
 ```Javascript
 Get: http://localhost:8080/car/get
 ```
-
+<br/>
 
 Deal
 
@@ -124,7 +124,7 @@ Deal
 ```Javascript
 Get: http://localhost:8080/deal/get
 ```
-
+<br/>
 
 Sold vehicle
 
