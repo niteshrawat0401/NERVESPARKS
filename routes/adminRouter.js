@@ -9,10 +9,10 @@ require("dotenv").config();
 const adminRouter = Router();
 
 adminRouter.post("/signup", async (req, res) => {
-    const { admin_name, admin_id, password } = req.body;
+    const { admin_email, admin_id, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     const newuser = await new Admin({
-        admin_name,
+        admin_email,
         admin_id,
         password: hashPassword
     });
@@ -28,8 +28,8 @@ adminRouter.post("/signup", async (req, res) => {
 
 
   adminRouter.post("/login", async (req, res) => {
-    const { admin_name } = req.body;
-    const user = await Admin.findOne({  admin_name: admin_name });
+    const { admin_email } = req.body;
+    const user = await Admin.findOne({  admin_email: admin_email });
     if (!user) {
         return res.status(400).json({ msg: "User not found" });
     }
@@ -52,7 +52,7 @@ adminRouter.post("/signup", async (req, res) => {
             msg: "Login successfully",
             accessToken: accessToken,
             refreshToken: refreshToken,
-            admin_name: user.admin_name,
+            admin_email: user.admin_email,
             userID : user._id
           });
       }

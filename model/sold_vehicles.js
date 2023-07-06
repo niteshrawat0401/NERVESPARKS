@@ -1,4 +1,4 @@
-const { model, Schema, Types } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 const soldVehiclesSchema = new Schema({
     vehicle_id: {
@@ -6,8 +6,8 @@ const soldVehiclesSchema = new Schema({
     // required: true,
   },
   car_id: {
-    type: Types.ObjectId,
-    ref: "car"
+    type: mongoose.Schema.Types.ObjectId,
+    ref : 'car'
   },
   vehicle_info: {
     type: String,

@@ -4,15 +4,19 @@ const connection = require("./db/db")
 const userRouter = require('./routes/userRouter')
 const dealerRouter = require('./routes/dealershipRouter')
 const adminRouter = require('./routes/adminRouter')
+const carsRouter = require('./routes/carsRouter')
+const soldVehicleRouter = require('./routes/soldVehiclesRouter')
 
 const app = express()
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.use('/auth', userRouter)
+app.use('/user', userRouter)
 app.use('/dealer', dealerRouter)
 app.use('/admin', adminRouter)
+app.use('/car', carsRouter)
+app.use('/sold', soldVehicleRouter)
 app.get('/', (req,res) => res.send('hello'))
 
 const PORT = process.env.PORT || 8000;
